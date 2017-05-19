@@ -27,5 +27,4 @@ class Finland extends VATFormat {
 
     false
   }
-
 }
