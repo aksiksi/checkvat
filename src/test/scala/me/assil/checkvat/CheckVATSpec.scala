@@ -59,4 +59,16 @@ class CheckVATSpec extends FunSpec {
       assert(!checker.check("00532445J"))
     }
   }
+
+  describe("Czech VAT") {
+    val checker = new Czech
+
+    it("should detect valid VAT") {
+      assert(checker.check("46505334"))
+    }
+
+    it("should detect invalid VAT") {
+      assert(!checker.check("46505335"))
+    }
+  }
 }
