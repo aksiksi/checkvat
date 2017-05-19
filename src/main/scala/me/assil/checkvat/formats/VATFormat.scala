@@ -2,9 +2,9 @@ package me.assil.checkvat.formats
 
 object VATFormat {
   // Helper function that merges single digits into one number
-  def mergeDigits(digits: List[Int]): Int = {
+  def mergeDigits(digits: List[Int]): Long = {
     if (digits.isEmpty) 0
-    else digits.head * Math.pow(10, digits.length-1).toInt + mergeDigits(digits.tail)
+    else digits.head * Math.pow(10, digits.length-1).toLong + mergeDigits(digits.tail)
   }
 }
 

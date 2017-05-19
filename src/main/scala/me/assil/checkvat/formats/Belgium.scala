@@ -18,10 +18,10 @@ class Belgium extends VATFormat {
         if (C(1) == 0) return false
 
         // Build a single number out of C0-C7
-        val num: Int = mergeDigits(C.slice(0, 8).toList)
+        val num: Long = mergeDigits(C.slice(0, 8).toList)
 
         // Compute checksum
-        val checksum: Int = 97 - (num % 97)
+        val checksum: Long = 97 - (num % 97)
 
         return (C(8)*10 + C(9)) == checksum
       }
