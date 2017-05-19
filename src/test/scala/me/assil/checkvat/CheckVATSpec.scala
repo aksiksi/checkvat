@@ -83,4 +83,64 @@ class CheckVATSpec extends FunSpec {
       assert(!checker.check("46505335"))
     }
   }
+
+  describe("Germany VAT") {
+    val checker = new Germany
+
+    it("should detect valid VAT") {
+      assert(checker.check("111111125"))
+    }
+
+    it("should detect invalid VAT") {
+      assert(!checker.check("111111124"))
+    }
+  }
+
+  describe("Denmark VAT") {
+    val checker = new Denmark
+
+    it("should detect valid VAT") {
+      assert(checker.check("88146328"))
+    }
+
+    it("should detect invalid VAT") {
+      assert(!checker.check("88146327"))
+    }
+  }
+
+  describe("Estonia VAT") {
+    val checker = new Estonia
+
+    it("should detect valid VAT") {
+      assert(checker.check("100207415"))
+    }
+
+    it("should detect invalid VAT") {
+      assert(!checker.check("100207416"))
+    }
+  }
+
+  describe("Greece VAT") {
+    val checker = new Greece
+
+    it("should detect valid VAT") {
+      assert(checker.check("040127797"))
+    }
+
+    it("should detect invalid VAT") {
+      assert(!checker.check("040127796"))
+    }
+  }
+
+  describe("Finland VAT") {
+    val checker = new Finland
+
+    it("should detect valid VAT") {
+      assert(checker.check("09853608"))
+    }
+
+    it("should detect invalid VAT") {
+      assert(!checker.check("09853607"))
+    }
+  }
 }
