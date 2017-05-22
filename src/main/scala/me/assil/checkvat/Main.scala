@@ -5,17 +5,14 @@ package me.assil.checkvat
   */
 object Main {
   def main(args: Array[String]) = {
-    println("Hello!")
+    val checker = new CheckVAT
 
-    val check = new CheckVAT
+    val vats = Array(
+      "U10223006",
+      "1776091951",
+      "101004508"
+    )
 
-    // Check Austrian VAT
-    println(check.check("U10223006"))
-
-    // Check Belgian VAT
-    println(check.check("1776091951"))
-
-    // Check Bulgarian VAT
-//    println(check.check("101004508"))
+    vats.foreach { vat => println(s"$vat is ${ if (checker.check(vat)) "valid" else "invalid" }") }
   }
 }
