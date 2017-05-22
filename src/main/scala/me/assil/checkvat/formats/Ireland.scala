@@ -8,14 +8,14 @@ class Ireland extends VATFormat {
   override val lengths = List(8)
   override val alpha = List(1, 7)
 
-  def checkChar(v: Int): Char = {
+  private def checkChar(v: Int): Char = {
     if (v == 0)
       'W'
     else
       (v + 64).toChar
   }
 
-  def oldStyle(vat: String): Boolean = {
+  private def oldStyle(vat: String): Boolean = {
     val digits = (List(vat(0)) ++ vat.substring(2, 7)).map(_.asDigit)
 
     if (!digits.contains(-1)) {
@@ -37,7 +37,7 @@ class Ireland extends VATFormat {
     false
   }
 
-  def newStyle(vat: String): Boolean = {
+  private def newStyle(vat: String): Boolean = {
     val digits = vat.substring(0, 7).map(_.asDigit)
 
     if (!digits.contains(-1)) {

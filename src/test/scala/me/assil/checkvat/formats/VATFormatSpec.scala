@@ -186,6 +186,7 @@ class VATFormatSpec extends FunSuite {
     assert(checker.check("47323875187"))
 
     // New style
+    assert(!checker.check("AB012345678"))
     assert(!checker.check("A0123456789"))
   }
 
@@ -209,6 +210,7 @@ class VATFormatSpec extends FunSuite {
 
     // Format 1
     assert(checker.check("8Z49289F"))
+    assert(checker.check("6346967G"))
     assert(!checker.check("8Z49289G"))
 
     // Format 2

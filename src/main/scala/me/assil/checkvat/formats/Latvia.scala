@@ -13,7 +13,7 @@ class Latvia extends VATFormat {
   override val alpha = List()
 
   override def check(vat: String): Boolean = {
-    if (vat.length == lengths.head && vat.count(_.isDigit) == lengths.head) {
+    if (vat.length == lengths.head && vat.count(!_.isDigit) == 0) {
       val C = vat.map(_.asDigit)
 
       if (C(0) > 3) {
@@ -34,6 +34,7 @@ class Latvia extends VATFormat {
       }
 
       else if (C(0) <= 3) {
+        // Format 2: Natural persons
         // Validate C1-C6 as a birth date
         val df = new SimpleDateFormat("DDMMYY")
         val dateString = vat.substring(0, 6)

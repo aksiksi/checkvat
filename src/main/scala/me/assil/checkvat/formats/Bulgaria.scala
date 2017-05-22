@@ -10,7 +10,7 @@ class Bulgaria extends VATFormat {
   override val lengths = List(9, 10)
   override val alpha = List()
 
-  def legalEntity(C: Seq[Int]): Boolean = {
+  private def legalEntity(C: Seq[Int]): Boolean = {
     var A1, A2, R1, R2, R: Int = 0
 
     for (i <- 1 to 8)
@@ -35,7 +35,7 @@ class Bulgaria extends VATFormat {
     C(8) == R
   }
 
-  def physicalPerson(C: Seq[Int]): Boolean = {
+  private def physicalPerson(C: Seq[Int]): Boolean = {
     // 10 digit physical person
     val birthYear = mergeDigits(C.slice(0, 2).toList)
     val birthMonth = mergeDigits(C.slice(2, 4).toList)
@@ -86,13 +86,13 @@ class Bulgaria extends VATFormat {
     false
   }
 
-  def foreigner(C: Seq[Int]): Boolean = {
+  private def foreigner(C: Seq[Int]): Boolean = {
     val A1 = 21*C(0) + 19*C(1) + 17*C(2) + 13*C(3) + 11*C(4) + 9*C(5) + 7*C(6) + 3*C(7) + C(8)
     val R = A1 % 10
     C(9) == R
   }
 
-  def otherCategory(C: Seq[Int]): Boolean = {
+  private def otherCategory(C: Seq[Int]): Boolean = {
     val A1 = 4*C(0) + 3*C(1) + 2*C(2) + 7*C(3) + 6*C(4) + 5*C(5) + 4*C(6) + 3*C(7) + 2*C(8)
     val R1 = 11 - A1 % 11
 

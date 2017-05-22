@@ -14,17 +14,15 @@ class Spain extends VATFormat {
     val D = (i: Int) => { C(i)/5 + (2*C(i)) % 10 }
     val checkChar = (v: Int) => (v + 64).toChar
 
-    if (c9.isLetter) {
-      // Judicial
-      val allowed: List[Char] = Range(65, 73).toList.map(_.toChar) ++ List('N','P','Q','R','S','W')
+    // Judicial
+    val allowed: List[Char] = Range(65, 73).toList.map(_.toChar) ++ List('N','P','Q','R','S','W')
 
-      if (allowed.contains(c1)) {
-        val S1 = C(2) + C(4) + C(6)
-        val S2 = D(1) + D(3) + D(5) + D(7)
-        val R = 10 - (S1 + S2) % 10
+    if (allowed.contains(c1)) {
+      val S1 = C(2) + C(4) + C(6)
+      val S2 = D(1) + D(3) + D(5) + D(7)
+      val R = 10 - (S1 + S2) % 10
 
-        return c9 == checkChar(R)
-      }
+      return c9 == checkChar(R)
     }
 
     false
@@ -41,33 +39,32 @@ class Spain extends VATFormat {
       mapping(v-1)
     }
 
-    if (c9.isLetter) {
-      // IF C9 Alphabetic and C1= K, L, M, X, Y, Z or numeric
-      val allowed = Array('K','L','M', 'X','Y','Z') ++ Range(48, 58).map(_.toChar)
 
-      if (allowed.contains(c1)) {
-        val C1 =
-          if (c1.isLetter) {
-            if (c1 == 'Y') 1
-            else if (c1 == 'Z') 2
-            else -1
-          } else {
-            c1.asDigit
-          }
+    // IF C9 Alphabetic and C1= K, L, M, X, Y, Z or numeric
+    val allowed = Array('K','L','M', 'X','Y','Z') ++ Range(48, 58).map(_.toChar)
 
-        var R: Long = 0
-
-        val num =
-          if (C1 != -1) {
-          mergeDigits(List(C1) ++ C.slice(1, 8))
+    if (allowed.contains(c1)) {
+      val C1 =
+        if (c1.isLetter) {
+          if (c1 == 'Y') 1
+          else if (c1 == 'Z') 2
+          else -1
         } else {
-          mergeDigits(C.slice(1, 8).toList)
+          c1.asDigit
         }
 
-        R = num % 23 + 1
+      var R: Long = 0
 
-        return c9 == checkChar(R.toInt)
+      val num =
+        if (C1 != -1) {
+        mergeDigits(List(C1) ++ C.slice(1, 8))
+      } else {
+        mergeDigits(C.slice(1, 8).toList)
       }
+
+      R = num % 23 + 1
+
+      return c9 == checkChar(R.toInt)
     }
 
     false

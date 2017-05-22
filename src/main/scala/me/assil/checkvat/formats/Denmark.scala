@@ -9,7 +9,7 @@ class Denmark extends VATFormat {
   override val alpha = List()
 
   override def check(vat: String): Boolean = {
-    if (vat.length == lengths.head && vat.count(_.isLetter) == 0) {
+    if (vat.length == lengths.head && vat.count(!_.isDigit) == 0) {
       val C = vat.map(_.asDigit).toArray
 
       if (C(0) > 0) {

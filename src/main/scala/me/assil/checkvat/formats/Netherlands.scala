@@ -11,9 +11,12 @@ class Netherlands extends VATFormat {
   override val alpha = List()
 
   override def check(vat: String): Boolean = {
-    if (vat.length == lengths.head &&
-        vat.count(_.isLetter) == 1 &&
-        vat(9) == 'B') {
+    if (
+      vat.length == lengths.head &&
+      vat.count(_.isDigit) == lengths.head-1 &&
+      vat.count(_.isLetter) == 1 &&
+      vat(9) == 'B'
+    ) {
 
       // Remove B character and convert to Ints
       val C: Seq[Int] = vat.map(c => if (c == 'B') 0 else c.asDigit)

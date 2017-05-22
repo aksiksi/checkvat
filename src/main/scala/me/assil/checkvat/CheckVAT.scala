@@ -4,9 +4,15 @@ import me.assil.checkvat.formats._
 
 import scalaj.http._
 
-object CheckVAT {
+/**
+  * Checks a VAT number for validity.
+  */
+class CheckVAT {
+  // Params: country code, country code, VAT
+  val REMOTE_URL = "http://ec.europa.eu/taxation_customs/vies/viesquer.do?selectedLanguage=PL&ms=%s&iso=%s&vat=%s"
+
   // Build a map of VAT formats for all EU member states
-  lazy val FORMATS = Map(
+  val FORMATS = Map(
     "AT" -> new Austria,
     "BE" -> new Belgium,
     "BG" -> new Bulgaria,
@@ -36,28 +42,18 @@ object CheckVAT {
     "SK" -> new Slovakia
   )
 
-  lazy val COUNTRIES = FORMATS.keySet.toVector
-
-  // Params: country code, country code, VAT
-  val REMOTE_URL = "http://ec.europa.eu/taxation_customs/vies/viesquer.do?selectedLanguage=PL&ms=%s&iso=%s&vat=%s"
-}
-
-/**
-  * Checks a VAT number for validity.
-  */
-class CheckVAT {
-  import CheckVAT._
+  val COUNTRIES = FORMATS.keySet.toVector
 
   /**
     * Checks if an input String is a valid VAT number. Enumerates all defined VAT
     * formats, as defined in `FORMATS` above).
     *
     * @param input Input String to be checked
-    * @return Valid VAT number or not
+    * @return VAT is valid or not valid
     */
   def check(input: String): Boolean = {
     // Ensure input is valid sequence of characters
-    val vat: String = input.trim.filter(_.isLetterOrDigit)
+    val vat: String = input.trim.filter(c => c.isLetterOrDigit || List('+', '*').contains(c))
 
     // Check if given VAT matches against any of the defined formats
     for ((_, fmt) <- FORMATS) {
@@ -80,11 +76,11 @@ class CheckVAT {
     val vat: String = input.trim.filter(c => c.isLetterOrDigit || List('+', '*').contains(c))
 
     // Grab correct format from map
-    val fmt: Option[VATFormat] = FORMATS.get(country)
+    val lookup: Option[VATFormat] = FORMATS.get(country)
 
-    fmt match {
+    lookup match {
       case None => false
-      case Some(v) => v.check(vat)
+      case Some(v) => true
     }
   }
 

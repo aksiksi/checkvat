@@ -14,15 +14,18 @@ class UnitedKingdom extends VATFormat {
     if (vat.length == lengths.head) {
       val header: String = vat.substring(0, 2)
       val digits = vat.substring(2, 5).map(_.asDigit)
-      val num: Long = mergeDigits(digits.toList)
 
-      return {
-        if (header == "GD")
-          num >= 0 && num <= 499
-        else if (header == "HA")
-          num >= 500 && num <= 999
-        else
-          false
+      if (!digits.contains(-1)) {
+        val num: Long = mergeDigits(digits.toList)
+
+        return {
+          if (header == "GD")
+            num >= 0 && num <= 499
+          else if (header == "HA")
+            num >= 500 && num <= 999
+          else
+            false
+        }
       }
     }
 
@@ -32,6 +35,10 @@ class UnitedKingdom extends VATFormat {
   def format2(vat: String): Boolean = {
     if (lengths.tail.contains(vat.length)) {
       val C = vat.map(_.asDigit)
+
+      if (C.contains(-1))
+        return false
+
       val C1 = mergeDigits(C.slice(0, 9).toList)
 
       // Check for both [C1-C9] > 0 and [C10-C12] > 0 (if length == 12)

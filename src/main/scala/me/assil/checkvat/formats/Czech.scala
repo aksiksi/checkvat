@@ -96,7 +96,7 @@ class Czech extends VATFormat {
   }
 
   def specialIndividuals(C: Seq[Int]): Boolean = {
-    if (C(0) == 6) {
+    if (C.head == 6) {
       // A1 = 8*C2 + 7*C3 + 6*C4 + 5*C5 + 4*C6 + 3*C7 + 2*C8
       val A1 = (2 to 8).reverse.map(i => C(9-i)*i).sum
 
@@ -118,7 +118,7 @@ class Czech extends VATFormat {
   }
 
   override def check(vat: String): Boolean = {
-    if (vat.count(_.isLetter) == 0) {
+    if (vat.count(!_.isDigit) == 0) {
       val C = vat.map(_.asDigit)
 
       if (vat.length == 8)

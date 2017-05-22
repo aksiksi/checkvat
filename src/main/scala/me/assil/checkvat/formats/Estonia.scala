@@ -9,7 +9,7 @@ class Estonia extends VATFormat {
   override val alpha = List()
 
   override def check(vat: String): Boolean = {
-    if (vat.length == lengths.head && vat.count(_.isLetter) == 0) {
+    if (vat.length == lengths.head && vat.count(!_.isDigit) == 0) {
       val C = vat.map(_.asDigit)
       val weights = Vector(3, 7, 1, 3, 7, 1, 3, 7)
       val A1 = weights.zip(C).map(p => p._1*p._2).sum

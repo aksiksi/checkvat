@@ -11,8 +11,8 @@ class France extends VATFormat {
   override val alpha = List(0, 1)
   val allowedChars = "ABCDEFGHJKLMNPQRSTUVWXYZ"
 
-  def oldStyle(vat: String): Boolean = {
-    if (vat.count(_.isLetter) == 0) {
+  private def oldStyle(vat: String): Boolean = {
+    if (vat.count(!_.isDigit) == 0) {
       val C = vat.map(_.asDigit)
 
       val checksum = mergeDigits(C.slice(0, 2).toList)
@@ -24,9 +24,18 @@ class France extends VATFormat {
     false
   }
 
-  def newStyle(vat: String): Boolean = {
+  private def checkChar(c: Char): Int = {
+    if (c.isDigit)
+      c.asDigit
+    else {
+      val idx = allowedChars.indexOf(c)
+      idx + 10
+    }
+  }
+
+  private def newStyle(vat: String): Boolean = {
     val check = {
-      vat.substring(0, 2).count(c => c.isDigit && allowedChars.contains(c)) == 2 &&
+      vat.substring(0, 2).count(c => c.isDigit || allowedChars.contains(c)) == 2 &&
       vat.substring(2, 11).count(_.isDigit) == 9
     }
 
@@ -54,15 +63,6 @@ class France extends VATFormat {
     }
 
     false
-  }
-
-  def checkChar(c: Char): Int = {
-    if (c.isDigit)
-      c.asDigit
-    else {
-      val idx = allowedChars.indexOf(c)
-      idx + 10
-    }
   }
 
   override def check(vat: String): Boolean = {

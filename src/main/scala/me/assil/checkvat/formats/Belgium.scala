@@ -15,7 +15,8 @@ class Belgium extends VATFormat {
       if (vat.head == '0') {
         val C: Seq[Int] = vat.map(_.asDigit)
 
-        if (C(1) == 0) return false
+        if (C.contains(-1) || C(1) == 0)
+          return false
 
         // Build a single number out of C0-C7
         val num: Long = mergeDigits(C.slice(0, 8).toList)

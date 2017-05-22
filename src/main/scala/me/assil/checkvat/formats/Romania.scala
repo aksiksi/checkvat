@@ -9,7 +9,7 @@ class Romania extends VATFormat {
   override val alpha = List()
 
   override def check(vat: String): Boolean = {
-    if (lengths.contains(vat.length) && vat.count(_.isLetter) == 0) {
+    if (lengths.contains(vat.length) && vat.count(!_.isDigit) == 0) {
       if (vat(0) != '0') {
         // Zero-pad due to variable length requirement
         val numZeroes = lengths.last - vat.length

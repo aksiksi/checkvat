@@ -17,10 +17,12 @@ class Austria extends VATFormat {
         // Prepend placeholder to use same notation as spec
         val C: Seq[Int] = Seq(0, 0) ++ vat.tail.map(_.asDigit)
 
-        val R: Int = S(C(3)) + S(C(5)) + S(C(7))
-        val checksum: Int = (10 - (R + C(2) + C(4) + C(6) + C(8) + 4) % 10) % 10
+        if (!C.contains(-1)) {
+          val R: Int = S(C(3)) + S(C(5)) + S(C(7))
+          val checksum: Int = (10 - (R + C(2) + C(4) + C(6) + C(8) + 4) % 10) % 10
 
-        return C(9) == checksum
+          return C(9) == checksum
+        }
       }
     }
 
