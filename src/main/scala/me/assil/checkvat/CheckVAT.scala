@@ -52,7 +52,7 @@ class CheckVAT {
     * @return VAT is valid or not valid
     */
   def check(input: String): Boolean = {
-    // Ensure input is valid sequence of characters
+    // VAT can only contain digits or letters OR +, * in the case of Ireland
     val vat: String = input.trim.filter(c => c.isLetterOrDigit || List('+', '*').contains(c))
 
     // Check if given VAT matches against any of the defined formats
@@ -80,7 +80,7 @@ class CheckVAT {
 
     lookup match {
       case None => false
-      case Some(v) => true
+      case Some(v) => v.check(vat)
     }
   }
 
