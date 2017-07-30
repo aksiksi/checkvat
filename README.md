@@ -2,10 +2,6 @@
 
 A Scala library that checks for the validity of a given EU VAT as defined by the VIES specification.
 
-## Commercial Use
-
-If you would like a non-copyleft license for use in a commercial product, feel free to [contact me](mailto:help@assil.me).
-
 ## Build
 
 Install the latest version of `sbt`, then run: `sbt compile`.
@@ -34,3 +30,7 @@ class Main extends App {
   assert(c1 == c2 == true)
 }
 ```
+
+## Commercial Use
+
+If you would like a 1 year license for use in a commercial product, feel free to [contact me](mailto:help@assil.me). The license includes full support and priority consideration for new features.
