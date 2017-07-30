@@ -19,19 +19,14 @@ class Main extends App {
   // We can also check the same number without specifying the ISO country code
   val c2 = checker.check("556188840401")
   
-  // Let's check the EU database over HTTP
-  // Note that the EU database also checks if the number is actually registered!
-  val c3 = checker.remoteCheck("556188840401", "SE")
-  
-  // All of the above give the same result
-  assert(c1 == c2 == c3 == true)
+  assert(c1 == c2 == true)
 }
 ```
 
 ## Build
 
-Install the latest version of `sbt`, then run: `sbt compile`
+Install the latest version of `sbt`, then run: `sbt compile`.
 
-## Tests
+## Test
 
-Simply run: `sbt test`
+Simply run: `sbt test`.

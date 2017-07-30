@@ -2,16 +2,11 @@ package me.assil.checkvat
 
 import me.assil.checkvat.formats._
 
-import scalaj.http._
-
 /**
   * Checks a VAT number for validity.
   */
 class CheckVAT {
-  // Params: country code, country code, VAT
-  val REMOTE_URL = "http://ec.europa.eu/taxation_customs/vies/viesquer.do?selectedLanguage=PL&ms=%s&iso=%s&vat=%s"
-
-  // Build a map of VAT formats for all EU member states
+  // Map of VAT formats for all EU member states
   val FORMATS = Map(
     "AT" -> new Austria,
     "BE" -> new Belgium,
@@ -46,7 +41,7 @@ class CheckVAT {
 
   /**
     * Checks if an input String is a valid VAT number. Enumerates all defined VAT
-    * formats, as defined in `FORMATS` above).
+    * formats, as defined in `FORMATS` above.
     *
     * @param input Input String to be checked
     * @return VAT is valid or not valid
@@ -82,29 +77,5 @@ class CheckVAT {
       case None => false
       case Some(v) => v.check(vat)
     }
-  }
-
-  /**
-    * Checks an input VAT number and country against the EU database.
-    *
-    * @param vat VAT number in string format
-    * @param country Two letter ISO country code
-    * @return
-    */
-  def remoteCheck(vat: String, country: String): Boolean = {
-    // VAT can only contain digits or letters OR +, * in the case of Ireland
-    val clean: String = vat.trim.filter(c => c.isLetterOrDigit || List('+', '*').contains(c))
-
-    // Perform API request
-    val url = REMOTE_URL.format(country, country, clean)
-    val body = Http(url).asString.body
-
-    // Check valid/invalid based on returned HTML
-    if (body.contains("invalidStyle"))
-      false
-    else if (body.contains("validStyle"))
-      true
-    else
-      false
   }
 }

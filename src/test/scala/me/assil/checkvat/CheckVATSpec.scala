@@ -35,10 +35,5 @@ class CheckVATSpec extends FunSpec {
       assert(checker.check("W7815395D", "ES"))
       assert(checker.check("47323875187", "FR"))
     }
-
-    it("should make a successful check via EU database") {
-      assert(checker.remoteCheck("U64938189", "AT"))
-      assert(!checker.remoteCheck("U6493818", "AT"))
-    }
   }
 }
