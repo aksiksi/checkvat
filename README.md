@@ -1,6 +1,18 @@
 # CheckVAT
 
-A Scala library that checks for the validity of a given EU VAT as defined by VIES.
+A Scala library that checks for the validity of a given EU VAT as defined by the VIES specification.
+
+## Commercial Use
+
+If you would like a non-copyleft license for use in a commercial product, feel free to [contact me](mailto:help@assil.me).
+
+## Build
+
+Install the latest version of `sbt`, then run: `sbt compile`.
+
+## Test
+
+Simply run: `sbt test`.
 
 ## Usage
 
@@ -22,11 +34,3 @@ class Main extends App {
   assert(c1 == c2 == true)
 }
 ```
-
-## Build
-
-Install the latest version of `sbt`, then run: `sbt compile`.
-
-## Test
-
-Simply run: `sbt test`.
