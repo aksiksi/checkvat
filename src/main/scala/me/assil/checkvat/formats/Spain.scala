@@ -39,7 +39,6 @@ class Spain extends VATFormat {
       mapping(v-1)
     }
 
-
     // IF C9 Alphabetic and C1= K, L, M, X, Y, Z or numeric
     val allowed = Array('K','L','M', 'X','Y','Z') ++ Range(48, 58).map(_.toChar)
 
