@@ -6,7 +6,7 @@ A Scala library that checks for the validity of a given EU VAT as defined by VIE
 
 Below is a fully working Scala snippet that demonstrates how to use the library:
 
-```
+```scala
 import me.assil.checkvat.CheckVAT
 
 class Main extends App {
