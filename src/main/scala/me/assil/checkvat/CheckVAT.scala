@@ -40,14 +40,14 @@ class CheckVAT {
   val COUNTRIES = FORMATS.keySet.toVector
 
   /**
-    * Checks if an input String is a valid VAT number. Enumerates all defined VAT
-    * formats, as defined in `FORMATS` above.
+    * Checks if an input VAT `String` is a valid VAT number. Enumerates all defined VAT
+    * formats, as defined in the variable `FORMATS` above.
     *
-    * @param input Input String to be checked
-    * @return VAT is valid or not valid
+    * @param input Input VAT `String` to be checked
+    * @return VAT valid (true) or invalid (false)
     */
   def check(input: String): Boolean = {
-    // VAT can only contain digits or letters OR +, * in the case of Ireland
+    // VAT can only contain digits or letters OR + and * in the case of Ireland
     val vat: String = input.trim.filter(c => c.isLetterOrDigit || List('+', '*').contains(c))
 
     // Check if given VAT matches against any of the defined formats
@@ -60,11 +60,11 @@ class CheckVAT {
   }
 
   /**
-    * Checks if an input String is a valid VAT number based on given country code.
+    * Checks if an input VAT `String` is a valid VAT number based on given country code.
     *
-    * @param input Input String to be checked
+    * @param input Input VAT `String` to be checked
     * @param country Two letter ISO country code
-    * @return Valid VAT number or not
+    * @return VAT valid (true) or invalid (false)
     */
   def check(input: String, country: String): Boolean = {
     // VAT can only contain digits or letters OR +, * in the case of Ireland
