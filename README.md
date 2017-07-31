@@ -33,4 +33,4 @@ class Main extends App {
 
 ## Commercial Use
 
-If you would like a 1 year license for use in a commercial product, feel free to [contact me](mailto:help@assil.me). The license includes full support and priority consideration for new features.
+If you would like a more permissive license for use in a commercial project, feel free to [contact me](twitter.com/aksiksi).
