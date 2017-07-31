@@ -11,4 +11,8 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 )
 
+// Compile for both 2.11 and 2.12
 crossScalaVersions := Seq("2.12.3", "2.11.11")
+
+// Better name for fat JAR
+assemblyJarName in assembly := "checkvat-java-" + version.value + ".jar"
