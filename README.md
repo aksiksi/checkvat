@@ -33,4 +33,4 @@ class Main extends App {
 
 ## Commercial Use
 
-If you would like a more permissive license for use in a commercial project, feel free to [contact me](twitter.com/aksiksi).
+If you would like a more permissive license for use in a commercial project, feel free to [contact me](https://twitter.com/aksiksi).
